@@ -13,9 +13,9 @@
       }
     },
     {
-      "path": "pages/goods/index",
+      "path": "pages/goodsType/index",
       "style": {
-        "navigationBarTitleText": "商品"
+        "navigationBarTitleText": "分类"
       }
     },
     {
@@ -45,7 +45,9 @@
       "van-grid": "/wxcomponents/vant/dist/grid/index",
       "van-grid-item": "/wxcomponents/vant/dist/grid-item/index",
       "van-loading": "/wxcomponents/vant/dist/loading/index",
-      "van-overlay": "/wxcomponents/vant/dist/overlay/index"
+      "van-overlay": "/wxcomponents/vant/dist/overlay/index",
+      "van-sidebar": "/wxcomponents/vant/dist/sidebar/index",
+      "van-sidebar-item": "/wxcomponents/vant/dist/sidebar-item/index"
     }
   },
   "tabBar": {
@@ -57,10 +59,10 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/goods/index",
+        "pagePath": "pages/goodsType/index",
         "iconPath": "static/logo.png",
         "selectedIconPath": "static/logo.png",
-        "text": "商品"
+        "text": "分类"
       },
       {
         "pagePath": "pages/cart/index",

@@ -9,7 +9,7 @@ export const configStore = defineStore(
         url: '/pages/index/index'
       },
       {
-        url: '/pages/goods/index'
+        url: '/pages/goodsType/index'
       },
       {
         url: '/pages/cart/index'
@@ -18,14 +18,16 @@ export const configStore = defineStore(
         url: '/pages/user/index'
       }
     ])
-    const config = reactive({
-      token: '',
-      selectTab: 0,
-      routes
-    })
+
+    const tabIndex = ref<number>(0)
+    const changeTabIndex = (index: number) => {
+      tabIndex.value = index
+    }
 
     return {
-      config
+      tabIndex,
+      changeTabIndex,
+      routes
     }
   },
   {

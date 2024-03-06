@@ -1,11 +1,11 @@
 import { configStore } from '@/store/modules/config'
 import { ref } from 'vue'
 
-const { config } = configStore()
+const { routes, tabIndex, changeTabIndex } = configStore()
 
-export const useRouterGo = (e: any) => {
-  console.log(e.detail)
-  config.selectTab = e.detail
-  uni.switchTab({ url: config.routes[config.selectTab].url })
+export const useRouterGo = (index: any) => {
+  let i: number = index.detail >= 0 ? index.detail : index
+  console.log(i)
+  changeTabIndex(i)
+  uni.switchTab({ url: routes[i].url })
 }
-export const useSelect = ref<number>(config.selectTab)

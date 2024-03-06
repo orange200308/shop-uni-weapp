@@ -43,7 +43,7 @@
       </van-grid>
     </view>
     <!-- tabbar -->
-    <van-tabbar :active="useSelect" @change="useRouterGo">
+    <van-tabbar :active="tabIndex" @change="useRouterGo">
       <van-tabbar-item icon="home-o">首页</van-tabbar-item>
       <van-tabbar-item icon="apps-o">分类</van-tabbar-item>
       <van-tabbar-item icon="cart-o">购物车</van-tabbar-item>
@@ -54,9 +54,9 @@
 
 <script setup lang="ts">
 import { useRouterGo } from '@/hooks/useRouter'
-import { configStore } from '@/store/modules/config'
 import { ref } from 'vue'
-const useSelect = ref(configStore().config.selectTab)
+import { configStore } from '@/store/modules/config'
+const { tabIndex } = configStore()
 
 // 输入框防抖
 const keyWord = ref<string>('')
@@ -77,8 +77,7 @@ const addCart = (index: number) => {
 // 查看商品
 const clickGoods = (index: number) => {
   console.log(index + '查看商品详情')
-  uni.$emit('showGoodsDetail', index)
-  uni.navigateTo({ url: `/pages/index/goodsDetail` })
+  uni.navigateTo({ url: `/pages/index/goodsDetail?id=${index}` })
 }
 </script>
 

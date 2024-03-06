@@ -1,5 +1,7 @@
+import { useRouterGo } from '@/hooks/useRouter'
+import type { User } from '@/types'
 import { defineStore } from 'pinia'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 export const userStore = defineStore(
   'User',
@@ -12,9 +14,17 @@ export const userStore = defineStore(
       sex: 0,
       birthday: ''
     })
+    let token = ref('')
+
+    const clearToken = () => {
+      token.value = ''
+      useRouterGo(3)
+    }
 
     return {
-      userInfo
+      userInfo,
+      token,
+      clearToken
     }
   },
   {

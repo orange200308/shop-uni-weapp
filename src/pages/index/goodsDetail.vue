@@ -1,39 +1,37 @@
 <template>
   <view class="content">
     <view>商品详情{{ goodsId }}</view>
-    <van-overlay :show="overlayVisibel">
-      <view class="custom-class">
-        <van-loading type="spinner" size="24px" vertical>
-          加载中...
-        </van-loading>
-      </view>
-    </van-overlay>
+    <view style="width: 80%; word-wrap: break-word">{{ goodsInfo }}</view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { onShow } from '@dcloudio/uni-app'
+import { httpV1 } from '@/utils/http/interceptor'
+import { onLoad, onPullDownRefresh, onShow } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 
-// 获取商品id
+// 获取商品信息
 const goodsId = ref(0)
-uni.$on('showGoodsDetail', (id: number) => {
-  goodsId.value = id
+const goodsInfo = ref('')
+const getGoodsInfo = async () => {
+  const res = await httpV1('/user/getUser', { id: goodsId.value })
+  goodsInfo.value = JSON.stringify(res.result)
+}
+// 初始化钩子
+onLoad((data) => {
+  console.log('goodsDetail onLoad')
+  goodsId.value = data?.id
+})
+// 页面显示钩子
+onShow(() => {
+  console.log('goodsDetail onShow')
+  getGoodsInfo()
 })
 
-// 展示遮罩
-const overlayVisibel = ref(false)
-onShow(() => {
-  overlayVisibel.value = true
-  setTimeout(() => {
-    overlayVisibel.value = false
-    uni.showToast({
-      title: `加载完成${goodsId.value}`,
-      duration: 2000,
-      position: 'center',
-      icon: 'success'
-    })
-  }, 3000)
+// 下拉刷新钩子
+onPullDownRefresh(() => {
+  console.log('goodsDetail onPullDownRefresh')
+  getGoodsInfo()
 })
 </script>
 
@@ -43,11 +41,6 @@ onShow(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  .custom-class {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
 }
 </style>
+@/http@/utils/http

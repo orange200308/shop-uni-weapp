@@ -3399,6 +3399,11 @@ min-document@^2.19.0:
   dependencies:
     dom-walk "^0.1.0"
 
+mini-types@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.npmmirror.com/mini-types/-/mini-types-0.1.7.tgz#36d5ea2cf18653b16f5d1a02c8d9b329c727d20a"
+  integrity sha512-aSoVvrIr/O9tbzFjSCeKr/T53Hu+un+FXkfWPfGcb/q8eAHXX1CDgSHv8l0GtFTlfHzznmn4hbRGB3UTWmZ3fA==
+
 minimatch@^9.0.3:
   version "9.0.3"
   resolved "https://registry.npmmirror.com/minimatch/-/minimatch-9.0.3.tgz#a6e00c3de44c3a542bfaae70abfc22420a6da825"
@@ -3410,6 +3415,11 @@ minimist@^1.2.6:
   version "1.2.8"
   resolved "https://registry.npmmirror.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
+
+miniprogram-api-typings@^3.12.2:
+  version "3.12.2"
+  resolved "https://registry.npmmirror.com/miniprogram-api-typings/-/miniprogram-api-typings-3.12.2.tgz#88f9a43e5a7ab9162d848feee0e876f9bae52585"
+  integrity sha512-OJB2uVAfhycX4teG/zEVpoThushQqLOx946XACDpVc6OQydiJWjn7djVzvNCbv0VOA7sbHGPQp/RkXD9vMCDEw==
 
 mkdirp@^0.5.1:
   version "0.5.6"
