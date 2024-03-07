@@ -51,9 +51,9 @@
   /* 小程序特有相关 */
   "mp-weixin": {
     "appid": "wxe342d986820f197b",
-    "appsecret": "4f50f3765c055d5ff2bba4ae0804fe28",
     "setting": {
-      "urlCheck": false
+      "urlCheck": false,
+      "appsecret": "4f50f3765c055d5ff2bba4ae0804fe28"
     }
   },
   "mp-alipay": {

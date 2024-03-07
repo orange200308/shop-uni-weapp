@@ -92,10 +92,12 @@ export const httpV1 = <T = any>(url: string, data: any) => {
         if (res.statusCode >= 200 && res.statusCode < 400) {
           resolve(res.data)
         } else {
+          utils.message.error('请求err')
           reject(res)
         }
       })
       .catch((err) => {
+        utils.message.error('请求err')
         reject(err)
       })
   })

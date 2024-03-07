@@ -5,7 +5,8 @@ const { routes, tabIndex, changeTabIndex } = configStore()
 
 export const useRouterGo = (index: any) => {
   let i: number = index.detail >= 0 ? index.detail : index
-  console.log(i)
   changeTabIndex(i)
-  uni.switchTab({ url: routes[i].url })
+  let url = `${routes[i].url}`
+  uni.switchTab({ url: url })
+  console.log(i, url)
 }

@@ -56,8 +56,13 @@
 import { useRouterGo } from '@/hooks/useRouter'
 import { ref } from 'vue'
 import { configStore } from '@/store/modules/config'
+import { onShow } from '@dcloudio/uni-app'
+
 const { tabIndex } = configStore()
 
+onShow((data) => {
+  console.log(data)
+})
 // 输入框防抖
 const keyWord = ref<string>('')
 let times: any = null
@@ -87,6 +92,7 @@ const clickGoods = (index: number) => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-bottom: 150rpx;
   .swiper-box {
     width: 100%;
   }
@@ -97,7 +103,6 @@ const clickGoods = (index: number) => {
   .goods-list {
     width: 100%;
     height: 100%;
-    margin-bottom: 150rpx;
     .goods-item {
       position: relative;
       width: 350rpx;
