@@ -1,5 +1,15 @@
 <template>
   <view class="content">
+    <view v-if="toTopVisible" class="toTop">
+      <van-button
+        @click="toTop"
+        round
+        type="default"
+        icon="back-top"
+        color="#bfbfbf"
+        size="small"
+      ></van-button>
+    </view>
     <!-- 滚动banner -->
     <view class="swiper-box">
       <swiper indicator-dots autoplay circular>
@@ -12,7 +22,8 @@
     <view class="search">
       <van-search
         :value="keyWord"
-        @change="changeSearch"
+        @change="useDebounce(changeSearchCb, $event)"
+        @search="handleSearch"
         placeholder="请输入搜索关键词"
       />
     </view>
@@ -25,7 +36,7 @@
           :key="index"
           use-slot
         >
-          <view @tap="clickGoods(index)" class="goods-item">
+          <view @tap="useShowGoodsDetail(index)" class="goods-item">
             <image
               class="cover"
               src="../../static/banner/4.jpg"
@@ -35,9 +46,6 @@
               <view class="title">Title</view>
               <p class="desc">descdescdescdescccccccccccc</p>
             </view>
-          </view>
-          <view class="addCart" @tap.stop="addCart(index)">
-            <van-icon name="shopping-cart-o" />
           </view>
         </van-grid-item>
       </van-grid>
@@ -56,33 +64,40 @@
 import { useRouterGo } from '@/hooks/useRouter'
 import { ref } from 'vue'
 import { configStore } from '@/store/modules/config'
-import { onShow } from '@dcloudio/uni-app'
+import utils from '@/utils'
+import { useDebounce } from '@/hooks/useSearch'
+import { onPageScroll } from '@dcloudio/uni-app'
+import { useShowGoodsDetail } from '@/hooks/useGoods'
 
+// 返回顶部按钮可见性
+const toTopVisible = ref(false)
+
+// 返回顶部
+const toTop = () => {
+  uni.pageScrollTo({
+    scrollTop: 0,
+    duration: 300
+  })
+}
+
+// 页面滚动
+onPageScroll((e) => {
+  toTopVisible.value = e.scrollTop > 500 ? true : false
+})
+
+// tabBar
 const { tabIndex } = configStore()
 
-onShow((data) => {
-  console.log(data)
-})
 // 输入框防抖
 const keyWord = ref<string>('')
-let times: any = null
-const changeSearch = (e: any) => {
+const changeSearchCb = (e: any) => {
   keyWord.value = e.detail
-  clearTimeout(times)
-  times = setTimeout(() => {
-    console.log('query', keyWord.value)
-  }, 300)
+  utils.message.success('query==' + keyWord.value)
 }
 
-// 添加购物车
-const addCart = (index: number) => {
-  console.log(index + '加入购物车')
-}
-
-// 查看商品
-const clickGoods = (index: number) => {
-  console.log(index + '查看商品详情')
-  uni.navigateTo({ url: `/pages/index/goodsDetail?id=${index}` })
+// 确认搜索
+const handleSearch = (e: any) => {
+  utils.message.success(`search ${e.detail}`)
 }
 </script>
 
@@ -93,6 +108,12 @@ const clickGoods = (index: number) => {
   align-items: center;
   justify-content: center;
   padding-bottom: 150rpx;
+  .toTop {
+    position: fixed;
+    z-index: 999;
+    right: 20rpx;
+    bottom: 200rpx;
+  }
   .swiper-box {
     width: 100%;
   }
@@ -108,7 +129,7 @@ const clickGoods = (index: number) => {
       width: 350rpx;
       height: 400rpx;
       transition: all 0.3s;
-      background-color: rgb(251, 251, 251);
+      background-color: #fbfbfb;
       .cover {
         width: 100%;
         height: 250rpx;
@@ -126,23 +147,6 @@ const clickGoods = (index: number) => {
     }
     .goods-item:active {
       background-color: #dedede;
-    }
-
-    .addCart {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-      right: 20rpx;
-      bottom: 40rpx;
-      width: 60rpx;
-      height: 40rpx;
-      border-radius: 10rpx;
-      border: 1px solid #e4e4e4;
-    }
-    .addCart:active {
-      background-color: rgb(255, 180, 123);
     }
   }
 }

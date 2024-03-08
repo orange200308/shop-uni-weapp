@@ -19,18 +19,15 @@ const getGoodsInfo = async () => {
 }
 // 初始化钩子
 onLoad((data) => {
-  console.log('goodsDetail onLoad')
   goodsId.value = data?.id
 })
 // 页面显示钩子
 onShow(() => {
-  console.log('goodsDetail onShow')
   getGoodsInfo()
 })
 
 // 下拉刷新钩子
 onPullDownRefresh(() => {
-  console.log('goodsDetail onPullDownRefresh')
   getGoodsInfo()
 })
 </script>

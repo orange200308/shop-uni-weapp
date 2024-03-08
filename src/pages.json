@@ -7,16 +7,23 @@
       }
     },
     {
-      "path": "pages/index/goodsDetail",
+      "path": "pages/goodsDetail/index",
       "style": {
         "navigationBarTitleText": "详情页"
       }
     },
     {
-      "path": "pages/goodsType/index",
+      "path": "pages/goodsType/tagType",
       "style": {
         "navigationBarTitleText": "分类",
         "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/goodsType/goodsList",
+      "style": {
+        "navigationBarTitleText": "分类详情",
+        "enablePullDownRefresh": true
       }
     },
     {
@@ -50,7 +57,9 @@
       "van-loading": "/wxcomponents/vant/dist/loading/index",
       "van-overlay": "/wxcomponents/vant/dist/overlay/index",
       "van-sidebar": "/wxcomponents/vant/dist/sidebar/index",
-      "van-sidebar-item": "/wxcomponents/vant/dist/sidebar-item/index"
+      "van-sidebar-item": "/wxcomponents/vant/dist/sidebar-item/index",
+      "van-card": "/wxcomponents/vant/dist/card/index",
+      "van-button": "/wxcomponents/vant/dist/button/index"
     }
   },
   "tabBar": {
@@ -62,7 +71,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/goodsType/index",
+        "pagePath": "pages/goodsType/tagType",
         "iconPath": "static/logo.png",
         "selectedIconPath": "static/logo.png",
         "text": "分类"

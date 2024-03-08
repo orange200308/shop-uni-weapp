@@ -9,7 +9,7 @@ export const configStore = defineStore(
         url: '/pages/index/index'
       },
       {
-        url: '/pages/goodsType/index'
+        url: '/pages/goodsType/tagType'
       },
       {
         url: '/pages/cart/index'

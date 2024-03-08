@@ -6,7 +6,7 @@
         <van-sidebar-item
           v-for="(item, index) in tagList"
           :key="index"
-          :title="`标签${index}`"
+          :title="`标签${index + 1}`"
         />
       </van-sidebar>
     </view>
@@ -19,8 +19,8 @@
       :scroll-top="rightScrollTop"
       class="right"
     >
-      <view v-for="(group, index) in typeList" class="type-group">
-        <p :id="'p' + index" class="title">分类组------{{ index }}</p>
+      <view v-for="(group, index) in typeList" :key="index" class="type-group">
+        <p :id="'p' + index" class="title">分类组------{{ index + 1 }}</p>
         <view
           @tap="showGoodsList(index)"
           v-for="(item, index) in group"
@@ -54,14 +54,18 @@ const { tabIndex } = configStore()
 // sideBar
 // 切换标签
 const changeSidebar = (e: any) => {
-  rightScrollTop.value = e.detail * 170
+  if (e.detail === tagList.value.length - 1) {
+    rightScrollTop.value = 9999
+  } else {
+    rightScrollTop.value = e.detail * 110
+  }
 }
 
 // 标签选中状态
 const activeKey = ref<number>(0)
 
 // 标签数据
-const tagList = ref(5)
+const tagList = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 //
 /**
  * 具体分类
@@ -71,26 +75,33 @@ const rightScrollTop = ref(0)
 
 // 滚动时事件
 const changeScroll = (e: any) => {
-  activeKey.value = parseInt(e.detail.scrollTop / 170 + '')
+  let _i = parseInt(e.detail.scrollTop / 110 + '')
+  activeKey.value =
+    _i > tagList.value.length - 1 ? tagList.value.length - 1 : _i
 }
 
 // 滚动到底部时事件
 const changeScrollLower = () => {
-  activeKey.value = tagList.value - 1
+  // activeKey.value = tagList.value - 1
 }
 
 // 详细分类数组
 const typeList = ref([
   [[], [], [], [], []],
+  [[], []],
   [[], [], [], [], []],
+  [[], [], [], []],
+  [[], [], []],
   [[], [], [], [], []],
+  [[], []],
   [[], [], [], [], []],
-  [[], [], [], [], []]
+  [[], [], [], []],
+  [[], [], []]
 ])
 
 // 查看类型商品
 const showGoodsList = (index: number) => {
-  utils.message.success(`showGoodsList${index}`)
+  uni.navigateTo({ url: `/pages/goodsType/goodsList?id=${index}` })
 }
 </script>
 
